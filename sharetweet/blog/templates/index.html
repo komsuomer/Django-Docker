@@ -1,0 +1,68 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1 style="margin-top: 20px; padding-left: 10px;">Share Post</h1>
+  <p>Welcome to Share Post, a website developed by <em>Omer</em>!</p>
+  </br>
+  <h4>Welcome {{user.username}}</h4>
+  </br>
+  
+  {% for post in posts %}
+
+  <div class="card w-75 text-center border-primary mb-3">
+    <div class="card-header">{{post.author}}</div>
+    <div class="card-body">
+      <p class="card-text">{{post.context}}</p>
+      <p class="card-text" id='like_count{{post.id}}' value={{post.like_count}}>{{post.like_count}} likes</p>
+      {% if user in post.likes.all %}
+      <a class="btn btn-primary" value="{{post.id}}" onclick='like(event)'>Unlike</a>
+      {% else %}
+      <a class="btn btn-primary" value="{{post.id}}" onclick='like(event)'>Like</a>
+      {% endif %}
+      
+    </div>
+    <div class="card-footer text-muted">
+      Tags : 
+      {% for t in post.tag.all %}
+        {{t.name}},
+      {% endfor %}<hr>
+      {{post.created_date}}
+    </div>
+  </div>
+
+  {% endfor %}
+
+  {% csrf_token %}
+
+  {% load static %}
+  <script type="text/javascript" src="{% static '/script/like.js' %}"></script>
+
+  <script>
+  {% comment %} const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+  function like(e){
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', "/like/" + e.target.value + '/');
+    xhr.setRequestHeader("X-CSRFToken", csrftoken); 
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        var responseInfo = JSON.parse(xhr.responseText);
+        if(responseInfo.like ){
+          e.target.innerHTML = 'Unlike';
+        }else if(responseInfo.unlike){
+          e.target.innerHTML = 'Like';
+        }
+      }
+      else{
+        alert('Bad request');
+      }
+
+    };
+    xhr.send("method="+(e.target.innerHTML == 'Like' ? 'like' : 'unlike'));
+  } {% endcomment %}
+      
+  </script>
+  
+
+{% endblock %}

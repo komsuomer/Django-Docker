@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1 style="margin-top: 20px; padding-left: 10px;">Discover Page</h1>
+  <br>
+  <h3>Select Tag</h3>
+  <br>
+  <ul class="list-group list-group-flush">
+  {% for t in tags %}
+  <li class="list-group-item"><a href="{% url 'discover-with-tag' t.name %}" style="text-decoration: none;">{{ t.name }}</a></li>
+  {% endfor %} 
+  </ul>
+{% endblock %}

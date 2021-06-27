@@ -1,0 +1,35 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1 style="margin-top: 20px; padding-left: 10px;">Profile Page</h1>
+  <br>
+  <h3>{{profile}}</h3>
+  <br>
+  <p><strong>Email :</strong> {{profile.user.email}}</p>
+  <p><strong>Birth Date : </strong>{{profile.birth_date}}</p>
+  <br>
+  <h4>Following : </h4>
+  {% for i in following %}{{i.following_user.username}}, {% endfor %}
+  <br>
+  <h4>Follower</h4>
+  {% for i in followers %}{{i.follower_user.username}}, {% endfor %}
+  </br></br>
+  <h3>My Posts</h3>
+  {% for post in posts %}
+    <div class="card w-75 text-center border-primary mb-3">
+    <div class="card-header">{{post.author}}</div>
+    <div class="card-body">
+      <p class="card-text">{{post.context}}</p>
+      <p class="card-text">{{post.like_count}} likes</p>      
+    </div>
+    <div class="card-footer text-muted">
+      Tags : 
+      {% for t in post.tag.all %}
+        {{t.name}},
+      {% endfor %}<hr>
+      {{post.created_date}}
+    </div>
+  </div>
+  {% endfor %}
+
+{% endblock %}

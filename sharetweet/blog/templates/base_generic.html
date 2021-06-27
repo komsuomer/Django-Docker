@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block title %}<title>Twitter Clone</title>{% endblock %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <!-- Add additional CSS in static file -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+        <div class="col-sm-2">
+        <div class="d-flex align-items-start flex-column" style="position:fixed;height: 100vh">
+
+        {% block sidebar %}
+
+            <div class="mb-auto p-2">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile/">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/discover/">Discover</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/search-user/" >Search User</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/write-post/" >Write Post</a>
+                </li>
+                {% if user.is_superuser %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/add-tag/" >Add Tag</a>
+                </li>
+                {% endif %}
+            </ul>
+            </div>
+
+            <div class="p-2">
+            <ul class="nav flex-column">
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <p>User: {{ user.get_username }}</p>
+                </li>
+                 <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout'%}?next=/home">Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'login'%}?next=/home">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'register'%}?next=/login">Register</a></li>
+            {% endif %}
+            </ul>
+            </div> 
+            
+        {% endblock %}
+        </div>
+        </div>
+        <div class="col-sm-10 ">{% block content %}{% endblock %}</div>
+        </div>
+        {% comment %} {% load static %}
+        <img src="{% static 'images/uml.png' %}" alt="UML diagram" style="width:555px;height:540px;"> {% endcomment %}
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+    </div>
+</body>
+</html>

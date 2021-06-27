@@ -1,0 +1,12 @@
+version: "3.9"
+services: 
+    app:
+        build: ./
+        image: app:django
+        container_name: django_container
+        volumes: 
+            - .:/django
+        ports: 
+            - 8000:8000
+        command: python sharetweet/manage.py runserver 0.0.0.0:8000
+            
