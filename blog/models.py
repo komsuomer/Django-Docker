@@ -56,7 +56,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, related_name='post', on_delete=CASCADE)
     context = models.TextField(max_length=500)
     created_date = models.DateTimeField(auto_now_add=True)
-    like_count = models.DecimalField(max_digits=999999, decimal_places=0, default=0)
+    like_count = models.DecimalField(max_digits=999, decimal_places=0, default=0)
     tag = models.ManyToManyField(Tag, related_name='posts') 
     likes = models.ManyToManyField(User, related_name='likes', verbose_name=_("like post verbose field"))
 
