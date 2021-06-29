@@ -30,7 +30,7 @@ class RegisterForm(forms.Form):
             }
         )
     )
-    birth_date = forms.DateField()
+    birth_date = forms.CharField(widget=forms.widgets.DateTimeInput(attrs={"type": "date"}))
 
     def clean(self):
         cleaned_data = super().clean()

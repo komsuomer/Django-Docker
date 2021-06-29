@@ -13,6 +13,8 @@ from .forms import FollowForm, LoginForm, RegisterForm, PostForm, TagForm
 @login_required
 def index(request):
     following = request.user.following.all()
+    # print('User : ' , request.user.following)
+    # return HttpResponse(status=200)
     f = [u.following_user for u in following]
     context = {
         'user' : request.user,

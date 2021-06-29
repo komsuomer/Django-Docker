@@ -28,7 +28,7 @@ SECRET_KEY = "814n9-)bfbq8ry9^^9)&_n62jo@z)e_z0e5(wc0jv8kw067b!w"
 DEBUG = False
 
 ALLOWED_HOSTS = ['localhost','0.0.0.0','127.0.0.1']
-
+# ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -78,6 +78,14 @@ WSGI_APPLICATION = 'sharetweet.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'db2',
+        'USER': 'postgres',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',
@@ -130,7 +138,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 # The absolute path to the directory where collectstatic will collect static files for deployment.
-STATIC_ROOT = BASE_DIR
+STATIC_ROOT = os.path.join(BASE_DIR, 'blog')
 
 # The URL to use when referring to static files (where they will be served from)
 STATIC_URL = '/static/'
