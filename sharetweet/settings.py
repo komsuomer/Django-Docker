@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '814n9-)bfbq8ry9^^9)&_n62jo@z)e
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 
-ALLOWED_HOSTS = ['localhost','0.0.0.0','127.0.0.1']
+ALLOWED_HOSTS = ['share-tweet.herokuapp.com','localhost','0.0.0.0','127.0.0.1']
 # ALLOWED_HOSTS = []
 
 # Application definition
