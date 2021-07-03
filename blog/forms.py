@@ -1,4 +1,3 @@
-from django.forms.models import fields_for_model
 from .models import Follow, Post, Tag
 from django import forms
 from django.forms import ModelForm
@@ -99,6 +98,9 @@ class FollowForm(ModelForm):
     class Meta:
         model = Follow
         exclude = ('follower_user',)
+        labels = {
+            'following_user':'User List'
+        }
 
 
 class PostForm(ModelForm):
@@ -116,3 +118,4 @@ class TagForm(ModelForm):
     class Meta:
         model = Tag
         fields = ('name',)
+        labels = {'name': 'Tag Name'}
